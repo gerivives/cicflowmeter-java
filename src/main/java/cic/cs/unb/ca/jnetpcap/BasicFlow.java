@@ -1066,34 +1066,34 @@ public class BasicFlow {
     public String dumpFlowBasedFeaturesEx() {
     	StringBuilder dump = new StringBuilder();
     	
-    	dump.append(flowId).append(separator);                						//1
-    	dump.append(FormatUtils.ip(src)).append(separator);   						//2
-    	dump.append(getSrcPort()).append(separator);          						//3
-    	dump.append(FormatUtils.ip(dst)).append(separator);  						//4
+    	//dump.append(flowId).append(separator);                						//1
+    	//dump.append(FormatUtils.ip(src)).append(separator);   						//2
+    	//dump.append(getSrcPort()).append(separator);          						//3
+    	//dump.append(FormatUtils.ip(dst)).append(separator);  						//4
     	dump.append(getDstPort()).append(separator);          						//5
-    	dump.append(getProtocol()).append(separator);         						//6 
+    	//dump.append(getProtocol()).append(separator);         						//6
     	
     	String starttime = DateFormatter.convertMilliseconds2String(flowStartTime/1000L, "dd/MM/yyyy hh:mm:ss a");
-    	dump.append(starttime).append(separator);									//7
+    	//dump.append(starttime).append(separator);									//7
     	
     	long flowDuration = flowLastSeen - flowStartTime;
     	dump.append(flowDuration).append(separator);								//8
     	
-    	dump.append(fwdPktStats.getN()).append(separator);							//9
-    	dump.append(bwdPktStats.getN()).append(separator);							//10	
-    	dump.append(fwdPktStats.getSum()).append(separator);						//11
-    	dump.append(bwdPktStats.getSum()).append(separator);						//12
+    	//dump.append(fwdPktStats.getN()).append(separator);							//9
+    	//dump.append(bwdPktStats.getN()).append(separator);							//10
+    	//dump.append(fwdPktStats.getSum()).append(separator);						//11
+    	//dump.append(bwdPktStats.getSum()).append(separator);						//12
     	
     	if(fwdPktStats.getN() > 0L) {
-    		dump.append(fwdPktStats.getMax()).append(separator);					//13
+    		//dump.append(fwdPktStats.getMax()).append(separator);					//13
     		dump.append(fwdPktStats.getMin()).append(separator);					//14
-    		dump.append(fwdPktStats.getMean()).append(separator);					//15
-    		dump.append(fwdPktStats.getStandardDeviation()).append(separator);		//16
+    		//dump.append(fwdPktStats.getMean()).append(separator);					//15
+    		//dump.append(fwdPktStats.getStandardDeviation()).append(separator);		//16
     	}else {
+    		//dump.append(0).append(separator);
     		dump.append(0).append(separator);
-    		dump.append(0).append(separator);
-    		dump.append(0).append(separator);
-    		dump.append(0).append(separator);
+    		//dump.append(0).append(separator);
+    		//dump.append(0).append(separator);
     	}
     	
     	if(bwdPktStats.getN() > 0L) {
@@ -1107,48 +1107,48 @@ public class BasicFlow {
     		dump.append(0).append(separator);
     		dump.append(0).append(separator);
 		}
-    	dump.append(((double)(forwardBytes+backwardBytes))/((double)flowDuration/1000000L)).append(separator);//21
+    	//dump.append(((double)(forwardBytes+backwardBytes))/((double)flowDuration/1000000L)).append(separator);//21
     	dump.append(((double)packetCount())/((double)flowDuration/1000000L)).append(separator);//22
     	dump.append(flowIAT.getMean()).append(separator);							//23
     	dump.append(flowIAT.getStandardDeviation()).append(separator);				//24
     	dump.append(flowIAT.getMax()).append(separator);							//25
-    	dump.append(flowIAT.getMin()).append(separator);							//26
+    	//dump.append(flowIAT.getMin()).append(separator);							//26
     	
     	if(this.forward.size()>1){
         	dump.append(forwardIAT.getSum()).append(separator);						//27
         	dump.append(forwardIAT.getMean()).append(separator);					//28
         	dump.append(forwardIAT.getStandardDeviation()).append(separator);		//29	
         	dump.append(forwardIAT.getMax()).append(separator);						//30
-        	dump.append(forwardIAT.getMin()).append(separator);						//31
+        	//dump.append(forwardIAT.getMin()).append(separator);						//31
         	
     	}else{
     		dump.append(0).append(separator);
     		dump.append(0).append(separator);
     		dump.append(0).append(separator);
     		dump.append(0).append(separator);
-    		dump.append(0).append(separator);
+    		//dump.append(0).append(separator);
     	}
     	if(this.backward.size()>1){
         	dump.append(backwardIAT.getSum()).append(separator);					//32
-        	dump.append(backwardIAT.getMean()).append(separator);					//33
+        	//dump.append(backwardIAT.getMean()).append(separator);					//33
         	dump.append(backwardIAT.getStandardDeviation()).append(separator);		//34	
         	dump.append(backwardIAT.getMax()).append(separator);					//35
-        	dump.append(backwardIAT.getMin()).append(separator);					//36
+        	//dump.append(backwardIAT.getMin()).append(separator);					//36
     	}else{
     		dump.append(0).append(separator);
+    		//dump.append(0).append(separator);
     		dump.append(0).append(separator);
     		dump.append(0).append(separator);
-    		dump.append(0).append(separator);
-    		dump.append(0).append(separator);
+    		//dump.append(0).append(separator);
     	}
     	
 		dump.append(fPSH_cnt).append(separator);									//37
-		dump.append(bPSH_cnt).append(separator);									//38
-		dump.append(fURG_cnt).append(separator);									//39
-		dump.append(bURG_cnt).append(separator);									//40
+		//dump.append(bPSH_cnt).append(separator);									//38
+		//dump.append(fURG_cnt).append(separator);									//39
+		//dump.append(bURG_cnt).append(separator);									//40
 
-		dump.append(fHeaderBytes).append(separator);								//41
-		dump.append(bHeaderBytes).append(separator);								//42
+		//dump.append(fHeaderBytes).append(separator);								//41
+		//dump.append(bHeaderBytes).append(separator);								//42
 		dump.append(getfPktsPerSecond()).append(separator);							//43
 		dump.append(getbPktsPerSecond()).append(separator);							//44
 		
@@ -1175,47 +1175,47 @@ public class BasicFlow {
 		} */
 		dump.append(flagCounts.get("FIN").value).append(separator);                 //50
 		dump.append(flagCounts.get("SYN").value).append(separator);                 //51
-		dump.append(flagCounts.get("RST").value).append(separator);                  //52
+		//dump.append(flagCounts.get("RST").value).append(separator);                  //52
 		dump.append(flagCounts.get("PSH").value).append(separator);                  //53
 		dump.append(flagCounts.get("ACK").value).append(separator);                  //54
 		dump.append(flagCounts.get("URG").value).append(separator);                  //55
-		dump.append(flagCounts.get("CWR").value).append(separator);                  //56
-		dump.append(flagCounts.get("ECE").value).append(separator);                  //57
+		//dump.append(flagCounts.get("CWR").value).append(separator);                  //56
+		//dump.append(flagCounts.get("ECE").value).append(separator);                  //57
 		
 		dump.append(getDownUpRatio()).append(separator);							//58
 		dump.append(getAvgPacketSize()).append(separator);							//59
-		dump.append(fAvgSegmentSize()).append(separator);							//60
+		//dump.append(fAvgSegmentSize()).append(separator);							//60
 		dump.append(bAvgSegmentSize()).append(separator);							//61
 		//dump.append(fHeaderBytes).append(separator);								//62 dupicate with 41
 		
-		dump.append(fAvgBytesPerBulk()).append(separator);							//63	
-		dump.append(fAvgPacketsPerBulk()).append(separator);						//64
-		dump.append(fAvgBulkRate()).append(separator);								//65
-		dump.append(fAvgBytesPerBulk()).append(separator);							//66
-		dump.append(bAvgPacketsPerBulk()).append(separator);						//67
-		dump.append(bAvgBulkRate()).append(separator);								//68
+		//dump.append(fAvgBytesPerBulk()).append(separator);							//63
+		//dump.append(fAvgPacketsPerBulk()).append(separator);						//64
+		//dump.append(fAvgBulkRate()).append(separator);								//65
+		//dump.append(fAvgBytesPerBulk()).append(separator);							//66
+		//dump.append(bAvgPacketsPerBulk()).append(separator);						//67
+		//dump.append(bAvgBulkRate()).append(separator);								//68
     	
-		dump.append(getSflow_fpackets()).append(separator);							//69
-		dump.append(getSflow_fbytes()).append(separator);							//70
-		dump.append(getSflow_bpackets()).append(separator);							//71
-		dump.append(getSflow_bbytes()).append(separator);							//72
+		//dump.append(getSflow_fpackets()).append(separator);							//69
+		//dump.append(getSflow_fbytes()).append(separator);							//70
+		//dump.append(getSflow_bpackets()).append(separator);							//71
+		//dump.append(getSflow_bbytes()).append(separator);							//72
 			
     	dump.append(Init_Win_bytes_forward).append(separator);						//73
     	dump.append(Init_Win_bytes_backward).append(separator);						//74
-    	dump.append(Act_data_pkt_forward).append(separator);						//75
-    	dump.append(min_seg_size_forward).append(separator);						//76
+    	//dump.append(Act_data_pkt_forward).append(separator);						//75
+    	//dump.append(min_seg_size_forward).append(separator);						//76
     	
     	
     	if(this.flowActive.getN()>0){
-        	dump.append(flowActive.getMean()).append(separator);					//77
-        	dump.append(flowActive.getStandardDeviation()).append(separator);		//78
-        	dump.append(flowActive.getMax()).append(separator);						//79
-        	dump.append(flowActive.getMin()).append(separator);						//80
+        	//dump.append(flowActive.getMean()).append(separator);					//77
+        	//dump.append(flowActive.getStandardDeviation()).append(separator);		//78
+        	//dump.append(flowActive.getMax()).append(separator);						//79
+        	//dump.append(flowActive.getMin()).append(separator);						//80
     	}else{
-			dump.append(0).append(separator);
-    		dump.append(0).append(separator);
-    		dump.append(0).append(separator);
-    		dump.append(0).append(separator);
+			//dump.append(0).append(separator);
+    		//dump.append(0).append(separator);
+    		//dump.append(0).append(separator);
+    		//dump.append(0).append(separator);
     	}    	
     	
     	if(this.flowIdle.getN()>0){
@@ -1230,7 +1230,8 @@ public class BasicFlow {
     		dump.append(0).append(separator);
     	}
 
-        dump.append(getLabel());
+		// TODO: call if you need to add label
+        //dump.append(getLabel());
 
     	
     	return dump.toString();
