@@ -1222,7 +1222,7 @@ public class BasicFlow {
 	    	dump.append(flowIdle.getMean()).append(separator);						//81
 	    	dump.append(flowIdle.getStandardDeviation()).append(separator);			//82
 	    	dump.append(flowIdle.getMax()).append(separator);						//83
-	    	dump.append(flowIdle.getMin()).append(separator);						//84	
+	    	dump.append(flowIdle.getMin());						//84
     	}else{
 			dump.append(0).append(separator);
     		dump.append(0).append(separator);
