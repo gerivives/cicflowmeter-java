@@ -1,15 +1,11 @@
 package cic.cs.unb.ca.jnetpcap;
 
-import cic.cs.unb.ca.jnetpcap.FlowFeatureStream;
-
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public enum FlowFeature {
+public enum FlowFeatureStream {
     fid("Flow ID","FID",false),							//1 this index is for feature not for ordinal
     src_ip("Src IP","SIP",false),						//2
     src_port("Src Port","SPT"),					//3
@@ -96,118 +92,42 @@ public enum FlowFeature {
 
 	Label("Label","LBL",new String[]{"CIC"});					//85
 
-
-	protected static final Logger logger = LoggerFactory.getLogger(FlowFeature.class);
 	private static String HEADER;
 	private String name;
 	private String abbr;
 	private boolean isNumeric;
 	private String[] values;
 
-    FlowFeature(String name,String abbr,boolean numeric) {
+    FlowFeatureStream(String name,String abbr,boolean numeric) {
         this.name = name;
         this.abbr = abbr;
         isNumeric = numeric;
     }
 
-	FlowFeature(String name, String abbr) {
+	FlowFeatureStream(String name, String abbr) {
         this.name = name;
         this.abbr = abbr;
         isNumeric = true;
 
     }
 
-	FlowFeature(String name,String abbr,String[] values) {
+	FlowFeatureStream(String name,String abbr,String[] values) {
 		this.name = name;
         this.abbr = abbr;
         this.values = values;
         isNumeric = false;
     }
 
-	public String getName() {
-		return name;
-	}
-
-    public String getAbbr() {
-        return abbr;
-    }
-
-    public boolean isNumeric(){
-        return isNumeric;
-    }
-
-	public static FlowFeature getByName(String name) {
-		for(FlowFeature feature: FlowFeature.values()) {
-			if(feature.getName().equals(name)) {
-				return feature;
-			}
-		}
-		return null;
-	}
-	
 	public static String getHeader() {
-		
 		if(HEADER ==null|| HEADER.length()==0) {
-			HEADER = FlowFeatureStream.getHeader();
+			StringBuilder header = new StringBuilder();
+
+			for(FlowFeatureStream feature: FlowFeatureStream.values()) {
+				header.append(feature.getName()).append(",");
+			}
+			header.deleteCharAt(header.length()-1);
+			HEADER = header.toString();
 		}
 		return HEADER;
 	}
-
-	public static List<FlowFeature> getFeatureList() {
-        List<FlowFeature> features = new ArrayList<>();
-        features.add(prot);
-        for(int i = fl_dur.ordinal(); i<= idl_min.ordinal(); i++) {
-            features.add(FlowFeature.values()[i]);
-        }
-        return features;
-    }
-
-	public static List<FlowFeature> getLengthFeature(){
-		List<FlowFeature> features = new ArrayList<>();
-		features.add(tot_l_fw_pkt);
-		features.add(tot_l_bw_pkt);
-		features.add(fl_byt_s);
-		features.add(fl_pkt_s);
-		features.add(fw_hdr_len);
-		features.add(bw_hdr_len);
-		features.add(fw_pkt_s);
-		features.add(bw_pkt_s);
-		features.add(pkt_size_avg);
-		features.add(fw_seg_avg);
-		features.add(bw_seg_avg);
-		return features;
-	}
-
-
-    public static String featureValue2String(FlowFeature feature, String value) {
-        String ret = value;
-
-        switch (feature) {
-            case prot:
-                try {
-                    int number  = NumberUtils.createNumber(value).intValue();
-                    if (number == 6) {
-                        ret = "TCP";
-
-                    } else if (number == 17) {
-                        ret = "UDP";
-
-                    } else {
-                        ret = "Others";
-                    }
-                } catch (NumberFormatException e) {
-                    logger.info("NumberFormatException {} value is {}",e.getMessage(),value);
-                    ret = "Others";
-                }
-            break;
-        }
-
-        return ret;
-    }
-
-	@Override
-	public String toString() {
-		return name;
-	}
-	
 }
