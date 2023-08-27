@@ -118,7 +118,11 @@ public enum FlowFeatureStream {
         isNumeric = false;
     }
 
-	public static String getHeader() {
+    public String getName() {
+        return name;
+    }
+
+    public static String getHeader() {
 		if(HEADER ==null|| HEADER.length()==0) {
 			StringBuilder header = new StringBuilder();
 
