@@ -1227,7 +1227,7 @@ public class BasicFlow {
 			dump.append(0).append(separator);
     		dump.append(0).append(separator);
     		dump.append(0).append(separator);
-    		dump.append(0).append();
+    		dump.append(0);
     	}
 
 		// TODO: call if you need to add label
