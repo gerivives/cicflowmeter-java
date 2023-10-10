@@ -1060,6 +1060,9 @@ public class BasicFlow {
 		else{
 			return "BENIGN";
 		}*/
+		if (FormatUtils.ip(src).equals("192.168.1.10")) {
+			return "brute";
+		}
         return "No Label";
     }
 	
