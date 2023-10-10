@@ -1236,8 +1236,7 @@ public class BasicFlow {
     	}
 
 		// TODO: call if you need to add label
-        //dump.append(getLabel());
-
+        dump.append(getLabel());
     	
     	return dump.toString();
     }
